@@ -2,21 +2,22 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { FiMessageSquare, FiMail, FiLock } from "react-icons/fi";
+import { toast } from "react-hot-toast";
+
+
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState("");
-  const [error, setError] = useState("");
 
   const login = async () => {
     if (!email.trim() || !password.trim()) {
-      setError("Please fill in all fields.");
+      toast.error("Please fill in all fields.");
       return;
     }
     setLoading(true);
-    setError("");
 
     try {
       const res = await fetch("/api/login", {
@@ -30,13 +31,13 @@ export default function LoginPage() {
       if (data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-        setSuccess("Login successful! Redirecting...");
+        toast.success("Login successful! Redirecting...");
         setTimeout(() => { window.location.href = "/"; }, 1000);
       } else {
-        setError(data.error || "Invalid credentials.");
+        toast.error(data.error || "Invalid credentials.");
       }
     } catch {
-      setError("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -55,8 +56,8 @@ export default function LoginPage() {
 
         {/* Logo / Brand */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500">
-            💬 ChatApp Pro
+          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500 flex items-center justify-center gap-2">
+            <FiMessageSquare className="text-blue-400 w-8 h-8" /> ChatApp Pro
           </h1>
           <p className="text-neutral-400 text-sm mt-2">Welcome back! Sign in to continue.</p>
         </div>
@@ -66,43 +67,38 @@ export default function LoginPage() {
 
           <h2 className="text-xl text-center font-bold text-white mb-6">Sign In</h2>
 
-          {success && (
-            <div className="mb-4 px-4 py-3 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-sm flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              {success}
-            </div>
-          )}
 
-          {error && (
-            <div className="mb-4 px-4 py-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
-              {error}
-            </div>
-          )}
 
           {/* Email */}
           <div className="mb-4">
             <label className="block text-sm text-neutral-400 mb-2">Email</label>
-            <input
-              type="email"
-              className="w-full bg-neutral-900 border border-neutral-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition placeholder-neutral-600"
-              placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && login()}
-            />
+            <div className="relative">
+              <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 w-4 h-4" />
+              <input
+                type="email"
+                className="w-full bg-neutral-900 border border-neutral-700 text-white pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition placeholder-neutral-600"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && login()}
+              />
+            </div>
           </div>
 
           {/* Password */}
           <div className="mb-6">
             <label className="block text-sm text-neutral-400 mb-2">Password</label>
-            <input
-              type="password"
-              className="w-full bg-neutral-900 border border-neutral-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition placeholder-neutral-600"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && login()}
-            />
+            <div className="relative">
+              <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 w-4 h-4" />
+              <input
+                type="password"
+                className="w-full bg-neutral-900 border border-neutral-700 text-white pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition placeholder-neutral-600"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && login()}
+              />
+            </div>
           </div>
 
           {/* Submit */}
