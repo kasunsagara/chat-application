@@ -11,7 +11,7 @@ const messageSchema = new mongoose.Schema({
   },
   room: {
     type: String,
-    default: "global_room",
+    required: true,
   },
   createdAt: {
     type: Date,
