@@ -201,7 +201,7 @@ export default function Home() {
             {/* TOP BAR */}
             <div className="bg-neutral-800/90 backdrop-blur-md border-b border-neutral-700 p-4 flex justify-between items-center shadow-sm">
               <div>
-                <h2 className="font-bold text-lg text-white"># {activeRoom.name}</h2>
+                <h2 className="font-bold text-lg text-white">{activeRoom.name}</h2>
                 <p className="text-xs text-neutral-400 flex items-center gap-1">
                   ID: <span className="font-mono bg-neutral-700 px-1.5 py-0.5 rounded text-neutral-300 select-all">{activeRoom.roomId}</span>
                 </p>

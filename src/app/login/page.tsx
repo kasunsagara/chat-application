@@ -64,7 +64,7 @@ export default function LoginPage() {
         {/* Card */}
         <div className="bg-neutral-800/80 backdrop-blur-md border border-neutral-700 rounded-2xl shadow-2xl p-8">
 
-          <h2 className="text-xl font-bold text-white mb-6">Sign In</h2>
+          <h2 className="text-xl text-center font-bold text-white mb-6">Sign In</h2>
 
           {success && (
             <div className="mb-4 px-4 py-3 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-sm flex items-center gap-2">

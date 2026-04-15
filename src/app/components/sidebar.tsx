@@ -107,7 +107,7 @@ export default function Sidebar({
                     : "hover:bg-neutral-700 text-neutral-300 border border-transparent"
                 }`}
               >
-                <div className="font-semibold text-sm truncate"># {room.name}</div>
+                <div className="font-semibold text-sm truncate">{room.name}</div>
                 <div className="text-xs opacity-60 truncate mt-1 flex justify-between items-center">
                   <span>{room.members.length} members</span>
                   {activeRoom?.roomId === room.roomId && (
