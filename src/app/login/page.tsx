@@ -31,7 +31,7 @@ export default function LoginPage() {
       if (data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-        toast.success("Login successful! Redirecting...");
+        toast.success("Login successful!");
         setTimeout(() => { window.location.href = "/"; }, 1000);
       } else {
         toast.error(data.error || "Invalid credentials.");

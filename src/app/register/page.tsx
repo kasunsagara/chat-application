@@ -29,7 +29,7 @@ export default function RegisterPage() {
       const data = await res.json();
 
       if (res.ok) {
-        toast.success("Account created! Redirecting to login...");
+        toast.success("Account created!");
         setTimeout(() => { window.location.href = "/login"; }, 1500);
       } else {
         toast.error(data.error || "Registration failed.");
