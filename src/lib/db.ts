@@ -1,17 +1,13 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
 
-dotenv.config();
-
-const mongoUri = process.env.MONGO_URI || "";
+const MONGO_URI = "mongodb+srv://kasunsagara689_db_user:19191920@cluster0.lhklthz.mongodb.net/?appName=Cluster0";
 
 export const connectDB = async () => {
   try {
-    await mongoose.connect(mongoUri);
+    await mongoose.connect(MONGO_URI);
     console.log("Database connected");
   } catch (error) {
     console.log("Database connection error:", error);
   }
 };
 
-// const mongoUri = process.env.MONGO_URI || "";
