@@ -25,7 +25,7 @@ const io = new Server(httpServer, {
     origin: "*",
     methods: ["GET", "POST"],
   },
-  transports: ["websocket", "polling"]
+  transports: ["websocket"]
 });
 
 // CONNECT DB
